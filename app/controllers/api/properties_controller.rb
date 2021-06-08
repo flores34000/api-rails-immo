@@ -1,5 +1,8 @@
-class Api::PropertiesController < ApplicationController
+class Api::PropertiesController < Api::BaseController
   before_action :set_property, only: [:show, :update, :destroy]
+  # before_action :authenticate_user!, except: [:index, :show]
+  # before_action :is_owner , only: [:edit, :update, :destroy]
+
 
   # GET /properties
   def index
@@ -18,7 +21,7 @@ class Api::PropertiesController < ApplicationController
     @property = Property.new(property_params)
 
     if @property.save
-      render json: @property, status: :created, location: @property
+      render json: @property, status: :created
     else
       render json: @property.errors, status: :unprocessable_entity
     end
@@ -47,5 +50,13 @@ class Api::PropertiesController < ApplicationController
     # Only allow a list of trusted parameters through.
     def property_params
       params.require(:property).permit(:longitude, :latitude, :description, :name, :price, :email)
+    end
+
+    def is_owner 
+      @property = Property.find(params[:id])
+      unless @property.user == current_user
+        render json: nil, status: :forbidden
+        return
+      end
     end
 end

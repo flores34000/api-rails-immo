@@ -16,6 +16,12 @@ gem 'puma', '~> 5.0'
 # Use Active Model has_secure_password
  gem 'bcrypt', '~> 3.1.7'
 
+ gem 'devise-jwt'
+
+ gem 'rack-cors'
+
+ gem 'jsonapi-rails'
+
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
@@ -23,7 +29,6 @@ gem 'puma', '~> 5.0'
 gem 'bootsnap', '>= 1.4.4', require: false
 
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
-gem 'rack-cors'
 
 # Use devise gem for create users, users can sell and buy properties
 gem 'devise'
