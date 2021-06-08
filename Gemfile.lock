@@ -137,6 +137,7 @@ GEM
     method_source (1.0.0)
     mini_magick (4.11.0)
     mini_mime (1.0.3)
+    mini_portile (0.6.2)
     mini_portile2 (2.5.3)
     minitest (5.14.4)
     msgpack (1.4.2)
@@ -227,7 +228,8 @@ DEPENDENCIES
   faker
   jsonapi-rails
   listen (~> 3.3)
-  mini_magick (>= 4.9.5)
+  mini_magick
+  mini_portile
   pg (~> 1.1)
   puma (~> 5.0)
   rack-cors
@@ -239,4 +241,4 @@ RUBY VERSION
    ruby 2.7.1p83
 
 BUNDLED WITH
-   2.2.8
+   2.2.18
