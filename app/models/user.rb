@@ -10,6 +10,6 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
         :jwt_authenticatable, jwt_revocation_strategy: JwtDenylist
 
-	validates :avatar, attached: true, dimension: { width: { min: 800, max: 2400 } },
+	validates :avatar,  dimension: { width: { min: 800, max: 2400 } },
 		content_type: [:png, :jpg, :jpeg], size: { less_than: 100.kilobytes , message: 'is not given between size' }
 end
