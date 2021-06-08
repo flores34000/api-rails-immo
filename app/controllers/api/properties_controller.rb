@@ -1,7 +1,7 @@
 class Api::PropertiesController < Api::BaseController
   before_action :set_property, only: [:show, :update, :destroy]
-  # before_action :authenticate_user!, except: [:index, :show]
-  # before_action :is_owner , only: [:edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:create, :update, :destroy]
+  before_action :is_owner , only: [:edit, :update, :destroy]
 
 
   # GET /properties
@@ -19,6 +19,7 @@ class Api::PropertiesController < Api::BaseController
   # POST /properties
   def create
     @property = Property.new(property_params)
+    @property.user_id = current_user.id if current_user
 
     if @property.save
       render json: @property, status: :created
@@ -49,7 +50,7 @@ class Api::PropertiesController < Api::BaseController
 
     # Only allow a list of trusted parameters through.
     def property_params
-      params.require(:property).permit(:longitude, :latitude, :description, :name, :price, :email)
+      params.require(:property).permit(:longitude, :latitude, :description, :name, :price,, :user_id)
     end
 
     def is_owner 
