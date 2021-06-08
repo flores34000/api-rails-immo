@@ -50,7 +50,7 @@ class Api::PropertiesController < Api::BaseController
 
     # Only allow a list of trusted parameters through.
     def property_params
-      params.require(:property).permit(:longitude, :latitude, :description, :name, :price, :user_id, images: [])
+      params.require(:property).permit(:longitude, :latitude, :description, :name, :price, :user_id)
     end
 
     def is_owner 
