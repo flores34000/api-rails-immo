@@ -5,8 +5,14 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+# Property.destroy_all
+
 require 'faker'
 5.times do 
-    Property.create(name:Faker::Name.name  , email:Faker::Internet.email)
-
+    Property.create(name:Faker::Name.name , email:Faker::Internet.email , description:Faker::Quote.famous_last_words, price: rand(10..50))
 end
+5.times do
+    User.create(email:Faker::Internet.email, password:"coucoucoucou")
+end
+puts "seed ended"
