@@ -29,11 +29,11 @@ class Api::UsersController < Api::BaseController
     end
 
     def destroy
-    if @user
-        @user.destroy
-        # Add success data
-        render json: success_data, status: 200
-    end
+        if @user
+            @user.destroy
+            # Add success data
+            render json: success_data, status: 200
+        end
     end
     
     private
