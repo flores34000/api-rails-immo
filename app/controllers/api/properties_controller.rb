@@ -22,7 +22,7 @@ class Api::PropertiesController < Api::BaseController
 
     @property = Property.new(
       longitude: property_params[:longitude],
-      lattitude: property_params[:lattitude],
+      latitude: property_params[:latitude],
       description: property_params[:description],
       name: property_params[:name],
       price: property_params[:price],
@@ -31,8 +31,11 @@ class Api::PropertiesController < Api::BaseController
 
       add_image = @property.property_pictures.attach(property_params[:images])
 
-    if @property.save && add_image.present? && !!@property
-      render json: @property, status: :created, @property.as_json(root: false, methods: :images_url).except('updated_at')
+    if @property.save
+      if add_image.present? && !!@property
+        render json: @property.as_json(root: false, methods: :images_url).except('updated_at')
+      end
+      render json: @property, status: :created
     else
       render json: @property.errors, status: :unprocessable_entity
     end
