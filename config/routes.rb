@@ -18,5 +18,7 @@ Rails.application.routes.draw do
       sessions: 'sessions',
       registrations: 'registrations'
     }
+
+    post '/presigned_url', to: 'direct_upload#create'
 end
    

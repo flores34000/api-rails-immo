@@ -18,11 +18,21 @@ class Api::PropertiesController < Api::BaseController
 
   # POST /properties
   def create
-    @property = Property.new(property_params)
-    @property.user_id = current_user.id if current_user
+    @user = current_user
 
-    if @property.save
-      render json: @property, status: :created
+    @property = Property.new(
+      longitude: property_params[:longitude],
+      lattitude: property_params[:lattitude],
+      description: property_params[:description],
+      name: property_params[:name],
+      price: property_params[:price],
+      user_id: @user.id,
+      )
+
+      add_image = @property.property_pictures.attach(property_params[:images])
+
+    if @property.save && add_image.present? && !!@property
+      render json: @property, status: :created, @property.as_json(root: false, methods: :images_url).except('updated_at')
     else
       render json: @property.errors, status: :unprocessable_entity
     end
@@ -50,7 +60,7 @@ class Api::PropertiesController < Api::BaseController
 
     # Only allow a list of trusted parameters through.
     def property_params
-      params.require(:property).permit(:longitude, :latitude, :description, :name, :price, :user_id)
+      params.require(:property).permit(:longitude, :latitude, :description, :name, :price, :user_id, :images)
     end
 
     def is_owner 
