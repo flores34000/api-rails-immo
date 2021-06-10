@@ -29,12 +29,12 @@ class Api::PropertiesController < Api::BaseController
       user_id: @user.id,
       )
 
-      add_image = @property.images.attach(property_params[:images])
+    #  add_image = @property.images.attach(property_params[:images])
 
     if @property.save
-      if add_image.present? && !!@property
-        render json: @property.as_json(root: false, methods: :images_url).except('updated_at')
-      end
+     # if add_image.present? && !!@property
+      #  render json: @property.as_json(root: false, methods: :images_url).except('updated_at')
+      #end
       render json: @property, status: :created
     else
       render json: @property.errors, status: :unprocessable_entity
@@ -63,7 +63,7 @@ class Api::PropertiesController < Api::BaseController
 
     # Only allow a list of trusted parameters through.
     def property_params
-      params.require(:property).permit(:longitude, :latitude, :description, :name, :price, :user_id, :images)
+      params.require(:property).permit(:longitude, :latitude, :description, :name, :price, :user_id) # , :images
     end
 
     def is_owner 
