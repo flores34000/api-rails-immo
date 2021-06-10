@@ -8,12 +8,12 @@ class Api::PropertiesController < Api::BaseController
   def index
     @properties = Property.all
 
-    render json: @properties
+    render json: @properties.to_json(include: [:user])
   end
 
   # GET /properties/1
   def show
-    render json: @property
+    render json: @property.to_json(include: [:user])
   end
 
   # POST /properties
