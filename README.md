@@ -76,3 +76,14 @@ gem 'dotenv-rails'
 
 * Deployment instructions
 This repository is already deployed…
+
+### Features 
+You can also check our front-end repository [here](https://github.com/Fr0ggym4n/ImmoCoin).
+
+## Made with ❤️ by:
+
+- [@flores34000](https://github.com/flores34000)
+- [@Janaina](https://github.com/Janainaf)
+- [@chendanet](https://github.com/chendanet)
+- [@YouCoding6](https://github.com/YouCoding6)
+- [@Fr0ggym4n](https://github.com/Fr0ggym4n)
