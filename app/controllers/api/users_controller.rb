@@ -2,6 +2,15 @@ class Api::UsersController < Api::BaseController
     before_action :find_user, only: [:show, :update]
     before_action :authenticate_user!, except: [:show, :index]   
 
+
+    def create
+        avatar = params[:pdf]
+        params = user_params.except(:pdf)
+        user = User.create!(params)
+        user.avatar.attach(avatar) if avatar.present? && !!user
+        render json: user.as_json(root: false, methods: :avatar_url).except('updated_at')
+    end
+
     def index
         @users = User.all
         render json: @users
@@ -20,11 +29,11 @@ class Api::UsersController < Api::BaseController
     end
 
     def destroy
-    if @user
-        @user.destroy
-        # Add success data
-        render json: success_data, status: 200
-    end
+        if @user
+            @user.destroy
+            # Add success data
+            render json: success_data, status: 200
+        end
     end
     
     private
@@ -40,6 +49,6 @@ class Api::UsersController < Api::BaseController
     end
 
     def user_params
-        params.require(:user).permit(:email,:password)
+        params.require(:user).permit(:email, :password, :pdf)
     end
 end
