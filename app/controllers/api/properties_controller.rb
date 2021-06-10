@@ -29,7 +29,7 @@ class Api::PropertiesController < Api::BaseController
       user_id: @user.id,
       )
 
-      add_image = @property.property_pictures.attach(property_params[:images])
+      add_image = @property.images.attach(property_params[:images])
 
     if @property.save
       if add_image.present? && !!@property
